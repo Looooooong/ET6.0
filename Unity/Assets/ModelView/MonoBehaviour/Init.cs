@@ -29,6 +29,7 @@ namespace ET
 				}
 				
 				Game.EventSystem.Publish(new EventType.AppStart());
+				Test();
 			}
 			catch (Exception e)
 			{
@@ -50,6 +51,20 @@ namespace ET
 		private void OnApplicationQuit()
 		{
 			Game.Close();
+		}
+
+		private void Test()
+		{
+			Debug.Log(1);
+			DeleyToDo().Coroutine();
+			Debug.Log(2);
+		}
+
+		private async ETTask<bool> DeleyToDo()
+		{
+			bool t =  await Game.Scene.GetComponent<TimerComponent>().WaitAsync(5000);
+			Debug.Log(3);
+			return t;
 		}
 	}
 }
